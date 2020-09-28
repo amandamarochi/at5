@@ -36,6 +36,7 @@ public class Cardapio {
 				itensPratos.add(item);
 			}
 			leitor.close();
+
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro na leitura do arquivo!");

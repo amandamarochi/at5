@@ -37,6 +37,7 @@ public class Pedidos {
 
         cod = leitor.nextInt();
 
+
         if (cod == 1) {
             System.out.println("Digite o nome do item que deseja adicionar: ");
             Item itemAdd = Cardapio.buscarPorNomePratos(leitor.nextLine());
