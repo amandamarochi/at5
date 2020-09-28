@@ -9,17 +9,17 @@ public class Programa {
 
 	public static void main (String[] args) throws IOException {
 
-		int retorno = 0;
+		int var = 0;
 		Scanner leitor = new Scanner(System.in);
 
 		do {
-			System.out.println("\n\t----CARDÁPIO----\n");
+			System.out.println("CARDÁPIO");
 			System.out.println("1 - Novo pedido");
 			System.out.println("2 - Listar");
 			System.out.println("3 - Modificar");
 			System.out.println("0 - Sair");
-			retorno = leitor.nextInt();
-			switch(retorno) {
+			var = leitor.nextInt();
+			switch(var) {
 				case 1:
 					Pedidos.novoPedido();
 					break;
@@ -29,7 +29,7 @@ public class Programa {
 				case 3:
 					modificar();
 			}
-		} while(retorno != 0);
+		} while(var != 0);
 
 		leitor.close();
 	}
