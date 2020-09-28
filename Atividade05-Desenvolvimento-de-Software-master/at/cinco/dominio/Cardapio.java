@@ -30,8 +30,6 @@ public class Cardapio {
 	
 	
 	public static List<Item> carregarListaDePratos(String arquivoPratos) {
-		
-		listaDePratos.clear();
 
 		try {
 			File arquivo = new File(Cardapio.arquivoPratos);
@@ -43,7 +41,7 @@ public class Cardapio {
 				String[] partes = linha.split(";");
 				Item pratos = new Item();
 				pratos.setNome(partes[0]);
-				//pratos.setPreco(Double.parseDouble(partes[1]));
+				pratos.setPreco(Double.parseDouble(partes[1]));
 				listaDePratos.add(pratos);
 				int i = 1;
 				for (Item item : listaDePratos) {
@@ -68,9 +66,16 @@ public class Cardapio {
 			
 			while(leitor.hasNextLine()) {
 				String linha = leitor.nextLine();
-				String[] partes = linha.split(";");
-				Item bebidas = new Item(partes[0], partes[1]);
+				String[] partes = linha.split("\t");
+				Item bebidas = new Item();
+				bebidas.setPreco(Double.parseDouble(partes[0].replaceAll(",", ".")));
+				bebidas.setNome(partes[1]);
 				listaDeBebidas.add(bebidas);
+			}
+
+			int i = 1;
+			for (Item item : listaDeBebidas) {
+				System.out.println((i++) + " " + item);
 			}
 			leitor.close();
 			
@@ -90,10 +95,16 @@ public class Cardapio {
 		
 		while(leitor.hasNext()) {
 			String linha = leitor.nextLine();
-			String[] partes = linha.split(";");
-			Item vinho = new Item(partes[0], partes[1]);
+			String[] partes = linha.split("\t");
+			Item vinho = new Item();
+			vinho.setPreco(Double.parseDouble(partes[0]));
+			vinho.setNome(partes[1]);
 			listaDeVinhos.add(vinho);
 		}
+			int i = 1;
+			for (Item item : listaDeVinhos) {
+				System.out.println((i++) + " " + item);
+			}
 		leitor.close();
 		
 	} catch (FileNotFoundException e) {

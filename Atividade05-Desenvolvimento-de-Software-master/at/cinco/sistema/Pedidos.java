@@ -35,18 +35,23 @@ public class Pedidos {
             Programa.listar();
 
             System.out.println("Digite o nome do item que deseja adicionar: ");
-            String name = leitor.nextLine();
+            leitor.nextLine();
             Item itemAdd = Cardapio.buscarPorNomePratos(leitor.nextLine());
+            //Item itemAdd2 = Cardapio.buscarPorNomeBebidas(leitor.nextLine());
+            //Item itemAdd3 = Cardapio.buscarPorNomeVinhos(leitor.nextLine());
 
 
-            System.out.println("Adicionar observação: (S/N)");
+            System.out.println("Adicionar observacao: ");
             String obs = leitor.nextLine();
 
             if (!obs.equals("N") && !obs.equals("n")) {
-                gravador.println("Nome: " + itemAdd.getNome() + " Preco:" + itemAdd.getPreco() + " Obs: " + obs);
-                System.out.println(itemAdd.getNome());
+                gravador.println("Nome: " + itemAdd.getNome() + " Preco:" + itemAdd.getPreco() + " Obs: " + obs + "\n");
+                //gravador.println("Nome: " + itemAdd2.getNome() + " Preco:" + itemAdd2.getPreco() + " Obs: " + obs);
+                //gravador.println("Nome: " + itemAdd3.getNome() + " Preco:" + itemAdd3.getPreco() + " Obs: " + obs);
+                System.out.println("Nome: " + itemAdd.getNome() + " Preco:" + itemAdd.getPreco() + " Obs: " + obs);
             } else {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome());
+                gravador.println(itemAdd.getNome() + itemAdd.getPreco());
+                System.out.println("Nome: " + itemAdd.getNome() + " Preco:" + itemAdd.getPreco());
             }
         System.out.println("DESEJA REALIZAR NOVO PEDIDO?");
         opcao = leitor.next().charAt(0);
@@ -61,7 +66,7 @@ public class Pedidos {
         listaDePedidos.clear();
         Scanner leitor = new Scanner(System.in);
 
-        System.out.println("\nInforme o codigo do pedido do cliente: ");
+        System.out.println("Informe o codigo: ");
         leitor.nextInt();
         File arquivo = new File("C:\\AT4REMASTERED\\pedido " + codigoPedido + ".txt");
         leitor = new Scanner(arquivo);
