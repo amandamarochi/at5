@@ -43,7 +43,7 @@ public class Cardapio {
 				String[] partes = linha.split(";");
 				Item pratos = new Item();
 				pratos.setNome(partes[0]);
-				//pratos.setPreco(Double.parseDouble(partes[0]));
+				//pratos.setPreco(Double.parseDouble(partes[1]));
 				listaDePratos.add(pratos);
 				int i = 1;
 				for (Item item : listaDePratos) {

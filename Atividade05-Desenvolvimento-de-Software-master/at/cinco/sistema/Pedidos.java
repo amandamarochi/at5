@@ -27,22 +27,31 @@ public class Pedidos {
         Scanner leitor = new Scanner(System.in);
         int cod;
 
-        Programa.listar();
+        System.out.println("DESEJA FAZER UM PEDIDO?");
 
+        char opcao = leitor.next().charAt(0);
+        while(opcao == 'S' || opcao == 's') {
+
+            Programa.listar();
 
             System.out.println("Digite o nome do item que deseja adicionar: ");
+            String name = leitor.nextLine();
             Item itemAdd = Cardapio.buscarPorNomePratos(leitor.nextLine());
+
 
             System.out.println("Adicionar observação: (S/N)");
             String obs = leitor.nextLine();
 
             if (!obs.equals("N") && !obs.equals("n")) {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
+                gravador.println("Nome: " + itemAdd.getNome() + " Preco:" + itemAdd.getPreco() + " Obs: " + obs);
                 System.out.println(itemAdd.getNome());
             } else {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome());
             }
+        System.out.println("DESEJA REALIZAR NOVO PEDIDO?");
+        opcao = leitor.next().charAt(0);
 
+    }
 
         gravador.close();
     }
@@ -72,7 +81,7 @@ public class Pedidos {
 
             }else if(linha.contains("TOTAL")) {
                 String [] partes = linha.split("\t");
-                total = Double.parseDouble(partes[1]);
+
             }else {
                 gravador.println(linha);
             }
