@@ -18,22 +18,18 @@ public class Pedidos {
     public static void novoPedido() throws IOException {
         FileWriter arquivo = new FileWriter("C:\\AT4REMASTERED\\pedido " + codigoPedido + ".txt");
         PrintWriter gravador = new PrintWriter(arquivo);
-        System.out.println(" -> Pedido " + codigoPedido);
         gravador.println("PEDIDO " + codigoPedido + "\n");
-        pedido(gravador,0);
+        pedido(gravador);
         codigoPedido++;
     }
 
-    public static void pedido(PrintWriter gravador, double total) throws FileNotFoundException {
+    public static void pedido(PrintWriter gravador) throws FileNotFoundException {
         Scanner leitor = new Scanner(System.in);
         int cod;
 
         Programa.listar();
 
-        System.out.println("\nInforme o tipo do item que deseja adicionar: ");
-        System.out.println("1 - Pratos");
-        System.out.println("2 - Bebidas");
-        System.out.println("3 - Vinhos");
+        System.out.println("\nInforme o número do item que deseja adicionar: ");
 
         cod = leitor.nextInt();
 
@@ -47,7 +43,6 @@ public class Pedidos {
 
             if (!obs.equals("N") && !obs.equals("n")) {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
-                total += itemAdd.getPreco();
                 System.out.println(itemAdd.getNome());
             } else {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome());
@@ -61,7 +56,6 @@ public class Pedidos {
 
             if (!obs.equals("N") && !obs.equals("n")) {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
-                total += itemAdd.getPreco();
                 System.out.println(itemAdd.getNome());
             } else {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome());
@@ -75,7 +69,6 @@ public class Pedidos {
 
             if (!obs.equals("N") && !obs.equals("n")) {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
-                total += itemAdd.getPreco();
                 System.out.println(itemAdd.getNome());
             } else {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome());
@@ -117,7 +110,7 @@ public class Pedidos {
             i++;
         }
 
-        pedido(gravador,total);
+        pedido(gravador);
 
         arquivoNovo.close();
     }

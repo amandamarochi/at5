@@ -86,7 +86,6 @@ public class Programa {
 	}
 
 	public static void listar(){
-		Item item = new Item(null, 0);
 
 		Scanner leitor = new Scanner(System.in);
 		System.out.println("1 - Para pratos");
@@ -94,33 +93,15 @@ public class Programa {
 		System.out.println("3 - Para vinhos");
 		switch(leitor.nextInt()) {
 			case 1:
-				List<Item> lista1 = Cardapio.carregarListaDePratos();
-				System.out.println("--------------------");
-				System.out.println("Tamanho da lista: " +lista1.size());
-
-				for (Item itensPratos : lista1) {
-					System.out.println(item.getNome() + ";" + " "  + item.getPreco());
-				}
+				Cardapio.carregarListaDePratos(Cardapio.arquivoPratos);
 				break;
 			case 2:
-				List<Item> lista2 = Cardapio.carregarListaDeBebidas();
-				System.out.println("--------------------");
-				System.out.println("Tamanho da lista: " +lista2.size());
-
-				for (Item itensBebidas : lista2) {
-					System.out.println(item.getNome() + ";" + " "  + item.getPreco());
-				}
+				Cardapio.carregarListaDeBebidas(Cardapio.arquivoBebidas);
 				break;
 			case 3:
-				List<Item> lista3 = Cardapio.carregarListaDeVinhos();
-				System.out.println("--------------------");
-				System.out.println("Tamanho da lista: " +lista3.size());
-
-				for (Item itensVinhos : lista3) {
-					System.out.println(item.getNome() + ";" + " "  + item.getPreco());
-
-				}
-		}
+				Cardapio.carregarListaDeVinhos(Cardapio.arquivoVinhos);
+			}
 
 	}
- }
+
+}

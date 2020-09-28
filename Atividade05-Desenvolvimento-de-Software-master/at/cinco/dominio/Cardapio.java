@@ -1,58 +1,67 @@
 package at.cinco.dominio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Cardapio {
-	
+
 	private static List<Item> listaDePratos;
 	private static List<Item> listaDeBebidas;
 	private static List<Item> listaDeVinhos;
-	
+
 	public static String arquivoPratos = "C:\\AT4REMASTERED\\pratos.txt";
 	public static String arquivoBebidas = "C:\\AT4REMASTERED\\bebidas-tabuladas.txt";
 	public static String arquivoVinhos = "C:\\AT4REMASTERED\\vinhos-tabulados.txt";
-			
+
+	static {
+		listaDePratos = new ArrayList<Item>();
+		//listaDePratos = carregarListaDePratos(arquivoPratos);
+
+		listaDeBebidas = new ArrayList<Item>();
+		//listaDeBebidas = carregarListaDeBebidas(arquivoBebidas);
+
+		listaDeVinhos = new ArrayList<Item>();
+		//listaDeVinhos = carregarListaDeVinhos(arquivoVinhos);
+	}
+
 	//Listar itens
-	public static List<Item> carregarListaDePratos() {
+	public static List<Item> carregarListaDePratos(String arquivoPratos) {
 		
-		List<Item> itensPratos = new ArrayList<>();
+		listaDePratos.clear();
+
 		try {
-			File arquivo = new File(arquivoPratos);
-			Scanner leitor = new Scanner(new FileInputStream(arquivoPratos), "UTF-8");
+			File arquivo = new File(Cardapio.arquivoPratos);
+			Scanner leitor = new Scanner(new FileInputStream(arquivo),"UTF-8");
 			leitor.nextLine();
-			
-			while(leitor.hasNext()) {
+
+			while(leitor.hasNextLine()) {
 				String linha = leitor.nextLine();
 				String[] partes = linha.split(";");
-				Item item = new Item(partes[0], partes[1]);
-				itensPratos.add(item);
+				Item pratos = new Item();
+				pratos.setNome(partes[0]);
+				//pratos.setPreco(Double.parseDouble(partes[0]));
+				listaDePratos.add(pratos);
 			}
 			leitor.close();
+			System.out.println(listaDePratos);
 
-			
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro na leitura do arquivo!");
 			e.printStackTrace();
 		}
 		
-		return itensPratos;	
+		return listaDePratos;
 		}
 
-	public static List<Item> carregarListaDeBebidas() {
+	public static List<Item> carregarListaDeBebidas(String arquivoBebidas) {
 		
 		List<Item> itensBebidas = new ArrayList<>();
 		
 		try {
-			File arquivo = new File(arquivoBebidas);
-			Scanner leitor = new Scanner(new FileInputStream(arquivoBebidas), "UTF-8");
+			File arquivo = new File(Cardapio.arquivoBebidas);
+			Scanner leitor = new Scanner(new FileInputStream(Cardapio.arquivoBebidas), "UTF-8");
 			leitor.nextLine();
 			
 			while(leitor.hasNext()) {
@@ -70,13 +79,13 @@ public class Cardapio {
 	return itensBebidas;
 	}
 	
-	public static List<Item> carregarListaDeVinhos() {
+	public static List<Item> carregarListaDeVinhos(String arquivoVinhos) {
 	
 		List<Item> itensVinhos = new ArrayList<>();
 	
 		try {
-		File arquivo = new File(arquivoVinhos);
-		Scanner leitor = new Scanner(new FileInputStream(arquivoVinhos), "UTF-8");
+		File arquivo = new File(Cardapio.arquivoVinhos);
+		Scanner leitor = new Scanner(new FileInputStream(Cardapio.arquivoVinhos), "UTF-8");
 		leitor.nextLine();
 		
 		while(leitor.hasNext()) {

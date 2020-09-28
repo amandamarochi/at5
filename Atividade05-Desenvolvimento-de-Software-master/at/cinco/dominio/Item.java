@@ -19,6 +19,10 @@ public class Item {
 		this.preco = Double.parseDouble(preco);
 	}
 
+	public Item() {
+
+	}
+
 	public String getNome() {
 		return nome;
 	}
