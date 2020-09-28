@@ -29,12 +29,7 @@ public class Pedidos {
 
         Programa.listar();
 
-        System.out.println("\nInforme o número do item que deseja adicionar: ");
 
-        cod = leitor.nextInt();
-
-
-        if (cod == 1) {
             System.out.println("Digite o nome do item que deseja adicionar: ");
             Item itemAdd = Cardapio.buscarPorNomePratos(leitor.nextLine());
 
@@ -47,33 +42,7 @@ public class Pedidos {
             } else {
                 gravador.println(itemAdd.getPreco() + itemAdd.getNome());
             }
-        } else if(cod == 2) {
-            System.out.println("Digite o nome do item que deseja adicionar: ");
-            Item itemAdd = Cardapio.buscarPorNomeBebidas(leitor.nextLine());
 
-            System.out.println("Adicionar observação: (S/N)");
-            String obs = leitor.nextLine();
-
-            if (!obs.equals("N") && !obs.equals("n")) {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
-                System.out.println(itemAdd.getNome());
-            } else {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome());
-            }
-        }else {
-            System.out.println("Digite o nome do item que deseja adicionar: ");
-            Item itemAdd = Cardapio.buscarPorNomeVinhos(leitor.nextLine());
-
-            System.out.println("Adicionar observação: (S/N)");
-            String obs = leitor.nextLine();
-
-            if (!obs.equals("N") && !obs.equals("n")) {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome() + obs);
-                System.out.println(itemAdd.getNome());
-            } else {
-                gravador.println(itemAdd.getPreco() + itemAdd.getNome());
-            }
-        }
 
         gravador.close();
     }

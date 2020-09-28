@@ -60,18 +60,17 @@ public class Cardapio {
 
 	public static List<Item> carregarListaDeBebidas(String arquivoBebidas) {
 		
-		List<Item> itensBebidas = new ArrayList<>();
-		
+
 		try {
 			File arquivo = new File(Cardapio.arquivoBebidas);
-			Scanner leitor = new Scanner(new FileInputStream(Cardapio.arquivoBebidas), "UTF-8");
+			Scanner leitor = new Scanner(new FileInputStream(arquivo), "UTF-8");
 			leitor.nextLine();
 			
-			while(leitor.hasNext()) {
+			while(leitor.hasNextLine()) {
 				String linha = leitor.nextLine();
 				String[] partes = linha.split(";");
-				Item item = new Item(partes[0], partes[1]);
-				itensBebidas.add(item);
+				Item bebidas = new Item(partes[0], partes[1]);
+				listaDeBebidas.add(bebidas);
 			}
 			leitor.close();
 			
@@ -79,23 +78,21 @@ public class Cardapio {
 			System.out.println("Erro na leitura do arquivo!");
 			e.printStackTrace();
 		}
-	return itensBebidas;
+	return listaDeBebidas;
 	}
 	
 	public static List<Item> carregarListaDeVinhos(String arquivoVinhos) {
-	
-		List<Item> itensVinhos = new ArrayList<>();
-	
+
 		try {
 		File arquivo = new File(Cardapio.arquivoVinhos);
-		Scanner leitor = new Scanner(new FileInputStream(Cardapio.arquivoVinhos), "UTF-8");
+		Scanner leitor = new Scanner(new FileInputStream(arquivo), "UTF-8");
 		leitor.nextLine();
 		
 		while(leitor.hasNext()) {
 			String linha = leitor.nextLine();
 			String[] partes = linha.split(";");
-			Item item = new Item(partes[0], partes[1]);
-			itensVinhos.add(item);
+			Item vinho = new Item(partes[0], partes[1]);
+			listaDeVinhos.add(vinho);
 		}
 		leitor.close();
 		
@@ -103,7 +100,7 @@ public class Cardapio {
 		System.out.println("Erro na leitura do arquivo!");
 		e.printStackTrace();
 	}
-	return itensVinhos;
+	return listaDeVinhos;
 	}
 	
 	//Incluir itens
