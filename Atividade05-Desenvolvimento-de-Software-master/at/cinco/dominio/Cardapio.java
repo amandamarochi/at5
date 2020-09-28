@@ -47,7 +47,7 @@ public class Cardapio {
 				listaDePratos.add(pratos);
 				int i = 1;
 				for (Item item : listaDePratos) {
-					System.out.println((i++) + " " + pratos.getNome());
+					System.out.println((i++) + " " + item);
 				}
 			}
 			leitor.close();
