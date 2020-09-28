@@ -1,5 +1,7 @@
 package at.cinco.dominio;
 
+import at.cinco.sistema.Pedidos;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +27,8 @@ public class Cardapio {
 		listaDeVinhos = new ArrayList<Item>();
 		//listaDeVinhos = carregarListaDeVinhos(arquivoVinhos);
 	}
-
-	//Listar itens
+	
+	
 	public static List<Item> carregarListaDePratos(String arquivoPratos) {
 		
 		listaDePratos.clear();
@@ -43,16 +45,17 @@ public class Cardapio {
 				pratos.setNome(partes[0]);
 				//pratos.setPreco(Double.parseDouble(partes[0]));
 				listaDePratos.add(pratos);
+				int i = 1;
+				for (Item item : listaDePratos) {
+					System.out.println((i++) + " " + pratos.getNome());
+				}
 			}
 			leitor.close();
-			System.out.println(listaDePratos);
-
-		} catch (FileNotFoundException e) {
-			System.out.println("Erro na leitura do arquivo!");
-			e.printStackTrace();
-		}
-		
-		return listaDePratos;
+			} catch (FileNotFoundException e) {
+				System.out.println("Erro na leitura do arquivo!");
+				e.printStackTrace();
+			}
+			return listaDePratos;
 		}
 
 	public static List<Item> carregarListaDeBebidas(String arquivoBebidas) {
@@ -265,7 +268,7 @@ public class Cardapio {
 			return vinhoRetornado;
 		}
 
-}	
+}
 	
 	
 	
