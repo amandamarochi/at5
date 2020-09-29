@@ -1,7 +1,5 @@
 package at.cinco.dominio;
 
-import at.cinco.sistema.Pedidos;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +17,10 @@ public class Cardapio {
 
 	static {
 		listaDePratos = new ArrayList<Item>();
-		//listaDePratos = carregarListaDePratos(arquivoPratos);
-
 		listaDeBebidas = new ArrayList<Item>();
-		//listaDeBebidas = carregarListaDeBebidas(arquivoBebidas);
-
 		listaDeVinhos = new ArrayList<Item>();
-		//listaDeVinhos = carregarListaDeVinhos(arquivoVinhos);
 	}
-	
-	
+
 	public static List<Item> carregarListaDePratos(String arquivoPratos) {
 
 		try {
@@ -51,8 +43,7 @@ public class Cardapio {
 			leitor.close();
 			} catch (FileNotFoundException e) {
 				System.out.println("Erro na leitura do arquivo!");
-				e.printStackTrace();
-			}
+				e.printStackTrace();}
 			return listaDePratos;
 		}
 
@@ -81,8 +72,7 @@ public class Cardapio {
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro na leitura do arquivo!");
-			e.printStackTrace();
-		}
+			e.printStackTrace();}
 	return listaDeBebidas;
 	}
 	
@@ -109,12 +99,10 @@ public class Cardapio {
 		
 	} catch (FileNotFoundException e) {
 		System.out.println("Erro na leitura do arquivo!");
-		e.printStackTrace();
-	}
+		e.printStackTrace();}
 	return listaDeVinhos;
 	}
 	
-	//Incluir itens
 	public static void addPrato(Item item) {
 		listaDePratos.add(item);
 		incluirPrato(item);
@@ -122,16 +110,20 @@ public class Cardapio {
 	
 	public static void incluirPrato(Item item) {
 		try {
+			Scanner leitor = new Scanner(System.in);
 			FileWriter arquivo = new FileWriter(arquivoPratos, true);
-			PrintWriter gravador = new PrintWriter(arquivoPratos);
-			gravador.println(item);
+			PrintWriter gravador = new PrintWriter(arquivo);
+			System.out.println("\nInforme o o item que deseja adicionar: ");
+			String nome = leitor.nextLine();
+			System.out.println("Informe o pre√ßo: ");
+			String price = leitor.nextLine();
+			gravador.print("\r" + nome + ";" + price);
 			gravador.close();
 			arquivo.close();
-			
+
 		} catch (IOException e) {
-			System.out.println("Erro na gravaÁ„o do arquivo!");
-			e.printStackTrace();
-		}
+			System.out.println("Erro na grava√ß√£o do arquivo!");
+			e.printStackTrace();}
 	}
 	
 	public static void addBebida(Item item) {
@@ -141,16 +133,20 @@ public class Cardapio {
 	
 		public static void incluirBebida(Item item) {
 			try {
+				Scanner leitor = new Scanner(System.in);
 				FileWriter arquivo = new FileWriter(arquivoBebidas, true);
-				PrintWriter gravador = new PrintWriter(arquivoBebidas);
-				gravador.println(item);
+				PrintWriter gravador = new PrintWriter(arquivo);
+				System.out.println("\nInforme o o item que deseja adicionar: ");
+				String nome = leitor.nextLine();
+				System.out.println("Informe o pre√ßo: ");
+				String price = leitor.nextLine();
+				gravador.print("\n" + price + "\t" + nome);
 				gravador.close();
 				arquivo.close();
-				
+
 			} catch (IOException e) {
-				System.out.println("Erro na gravaÁ„o do arquivo!");
-				e.printStackTrace();
-			}	
+				System.out.println("Erro na grava√ß√£o do arquivo!");
+				e.printStackTrace();}
 		}
 		
 		public static void addVinho(Item item) {
@@ -160,93 +156,97 @@ public class Cardapio {
 		
 		public static void incluirVinho(Item item) {
 			try {
+				Scanner leitor = new Scanner(System.in);
 				FileWriter arquivo = new FileWriter(arquivoVinhos, true);
-				PrintWriter gravador = new PrintWriter(arquivoVinhos);
-				gravador.println(item);
+				PrintWriter gravador = new PrintWriter(arquivo);
+				System.out.println("\nInforme o o item que deseja adicionar: ");
+				String nome = leitor.nextLine();
+				System.out.println("Informe o pre√ßo: ");
+				String price = leitor.nextLine();
+				gravador.print("\n" + price + "\t" + nome);
 				gravador.close();
 				arquivo.close();
-				
 			} catch (IOException e) {
-				System.out.println("Erro na gravaÁ„o do arquivo!");
-				e.printStackTrace();
-			}
+				System.out.println("Erro na grava√ß√£o do arquivo!");
+				e.printStackTrace();}
 		 }
-		
-		//Excluir itens e atualizar listas
-		public static void excluirPrato(Item item) {
+
+		public static void removePrato(Item item) {
 			listaDePratos.remove(item);
-			gravarListaAtualizadaPratos(listaDePratos);
+			try {
+				excluirPrato(item);
+			} catch (IOException e) {
+				e.printStackTrace();}
 		}
-		public static void gravarListaAtualizadaPratos(List<Item> listaDeItem1) {
+
+	public static void excluirPrato(Item item) throws IOException {
+		Scanner leitor = new Scanner(System.in);
+		System.out.println("\nInforme o nome do item que deseja remover: ");
+		String nome = leitor.nextLine();
+		Item itemRemover = buscarPorNomePratos(nome);
+		listaDePratos.remove(itemRemover);
+	}
+
+		public static void gravarListaAtualizadaPratos(Item prato) {
 			try {
 				FileWriter arquivo = new FileWriter(arquivoPratos, true);
 				PrintWriter gravador = new PrintWriter(arquivoPratos);
 				for (Item item : listaDePratos) {
-					gravador.println(item);
-						
-					}
+					gravador.println(item);}
 				gravador.close();
 				arquivo.close();
-				
 			} catch (IOException e) {
-				System.out.println("Erro na gravaÁ„o do arquivo!");
-				e.printStackTrace();
-			}
+				System.out.println("Erro na grava√ß√£o do arquivo!");
+				e.printStackTrace();}
 		}
 		
 		public static void excluirBebida(Item item) {
 			listaDeBebidas.remove(item);
 			gravarListaAtualizadaBebidas(listaDeBebidas);
 		}
+
 		public static void gravarListaAtualizadaBebidas(List<Item> listaDeItem2) {
 			try {
 				FileWriter arquivo = new FileWriter(arquivoBebidas, true);
 				PrintWriter gravador = new PrintWriter(arquivoBebidas);
 				for (Item item : listaDeBebidas) {
 					gravador.println(item);
-						
 					}
 				gravador.close();
 				arquivo.close();
 				
 			} catch (IOException e) {
-				System.out.println("Erro na gravaÁ„o do arquivo!");
-				e.printStackTrace();
-			}
+				System.out.println("Erro na grava√ß√£o do arquivo!");
+				e.printStackTrace();}
 		}
 		
 		public static void excluirVinho(Item item) {
 			listaDePratos.remove(item);
 			gravarListaAtualizadaVinhos(listaDePratos);
 		}
+
 		public static void gravarListaAtualizadaVinhos(List<Item> listaDeItem3) {
 			try {
 				FileWriter arquivo = new FileWriter(arquivoVinhos, true);
 				PrintWriter gravador = new PrintWriter(arquivoVinhos);
 				for (Item item : listaDeVinhos) {
-					gravador.println(item);
-						
-					}
+					gravador.println(item);}
 				gravador.close();
 				arquivo.close();
 				
 			} catch (IOException e) {
-				System.out.println("Erro na gravaÁ„o do arquivo!");
-				e.printStackTrace();
-			}
+				System.out.println("Erro na grava√ß√£o do arquivo!");
+				e.printStackTrace();}
 		}
 		
-		//Buscar por nome
 		public static Item buscarPorNomePratos(String nome) {
 			Item pratoRetornado = null;
 			
 			for (Item item : listaDePratos) {
 				if (item.getNome().contains(nome)){
 					pratoRetornado = item;
-					break;
-				}
+					break;}
 			}
-			
 			return pratoRetornado;
 		}
 		
@@ -256,10 +256,8 @@ public class Cardapio {
 			for (Item item : listaDeBebidas) {
 				if (item.getNome().contains(nome)){
 					bebidaRetornada = item;
-					break;
-				}
+					break;}
 			}
-			
 			return bebidaRetornada;
 		}
 		
@@ -269,16 +267,12 @@ public class Cardapio {
 			for (Item item : listaDePratos) {
 				if (item.getNome().contains(nome)){
 					vinhoRetornado = item;
-					break;
-				}
+					break;}
 			}
-			
 			return vinhoRetornado;
 		}
 
 }
-	
-	
 	
 	
 	
