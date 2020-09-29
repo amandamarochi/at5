@@ -1,6 +1,5 @@
 package at.cinco.sistema;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 import at.cinco.dominio.Cardapio;
 import at.cinco.dominio.Item;
@@ -8,12 +7,11 @@ import at.cinco.dominio.Item;
 public class Programa {
 
 	public static void main (String[] args) throws IOException {
-
 		int var = 0;
 		Scanner leitor = new Scanner(System.in);
 
 		do {
-			System.out.println("CARD¡PIO");
+			System.out.println("CARD√ÅPIO");
 			System.out.println("1 - Novo pedido");
 			System.out.println("2 - Listar");
 			System.out.println("3 - Modificar");
@@ -21,7 +19,7 @@ public class Programa {
 			var = leitor.nextInt();
 			switch(var) {
 				case 1:
-					Pedidos.novoPedido();
+					Pedidos.novo();
 					break;
 				case 2:
 					listar();
@@ -30,38 +28,35 @@ public class Programa {
 					modificar();
 			}
 		} while(var != 0);
-
 		leitor.close();
 	}
 
 	private static void modificar(){
 		Item item = new Item(null, 0);
-
 		Scanner leitor = new Scanner(System.in);
-
 		int retorno;
-		do {
-			System.out.println("1 - Adicionar item a pratos");
-			System.out.println("2 - Adicionar item a bebidas");
-			System.out.println("3 - Adicionar item aos vinhos");
-			System.out.println("4 - Atualizar item de pratos");
-			System.out.println("5 - Atualizar item de bebidas");
-			System.out.println("6 - Atualizar item de vinhos");
-			System.out.println("7 - Remover item de pratos");
-			System.out.println("8 - Remover item de bebidas");
-			System.out.println("9 - Remover item de vinhos");
+
+			System.out.println("1 - Adicionar pratos");
+			System.out.println("2 - Adicionar bebidas");
+			System.out.println("3 - Adicionar vinhos");
+			System.out.println("4 - Atualizar pratos");
+			System.out.println("5 - Atualizar bebidas");
+			System.out.println("6 - Atualizar vinhos");
+			System.out.println("7 - Remover pratos");
+			System.out.println("8 - Remover bebidas");
+			System.out.println("9 - Remover vinhos");
 			System.out.println("0 - Sair");
 
 			retorno = leitor.nextInt();
 			switch(retorno) {
 				case 1:
-					Cardapio.incluirPrato(item);
+					Cardapio.addPrato(item);
 					break;
 				case 2:
-					Cardapio.incluirBebida(item);
+					Cardapio.addBebida(item);
 					break;
 				case 3:
-					Cardapio.incluirVinho(item);
+					Cardapio.addVinho(item);
 					break;
 				case 4:
 					Cardapio.gravarListaAtualizadaPratos(null);
@@ -73,7 +68,7 @@ public class Programa {
 					Cardapio.gravarListaAtualizadaVinhos(null);
 					break;
 				case 7:
-					Cardapio.excluirPrato(item);
+					Cardapio.removePrato(item);
 					break;
 				case 8:
 					Cardapio.excluirBebida(item);
@@ -81,16 +76,14 @@ public class Programa {
 				case 9:
 					Cardapio.excluirVinho(item);
 			}
-		} while(retorno != 0);
-
 	}
 
 	public static void listar(){
 
 		Scanner leitor = new Scanner(System.in);
-		System.out.println("1 - Para pratos");
-		System.out.println("2 - Para bebidas");
-		System.out.println("3 - Para vinhos");
+		System.out.println("1 - Pratos");
+		System.out.println("2 - Bebidas");
+		System.out.println("3 - Vinhos");
 		switch(leitor.nextInt()) {
 			case 1:
 				Cardapio.carregarListaDePratos(Cardapio.arquivoPratos);
@@ -101,7 +94,5 @@ public class Programa {
 			case 3:
 				Cardapio.carregarListaDeVinhos(Cardapio.arquivoVinhos);
 			}
-
 	}
-
 }
